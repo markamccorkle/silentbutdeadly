@@ -13,6 +13,8 @@
 		0745034B16C9A73600B7CC7F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0745034916C9A73600B7CC7F /* Credits.rtf */; };
 		0745034E16C9A73600B7CC7F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0745034D16C9A73600B7CC7F /* AppDelegate.m */; };
 		0745035116C9A73600B7CC7F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0745034F16C9A73600B7CC7F /* MainMenu.xib */; };
+		0745035816C9A77000B7CC7F /* Icons.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0745035716C9A77000B7CC7F /* Icons.icns */; };
+		0745035A16C9A78900B7CC7F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0745035916C9A78900B7CC7F /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,8 @@
 		0745034C16C9A73600B7CC7F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		0745034D16C9A73600B7CC7F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		0745035016C9A73600B7CC7F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		0745035716C9A77000B7CC7F /* Icons.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icons.icns; sourceTree = "<group>"; };
+		0745035916C9A78900B7CC7F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0745035A16C9A78900B7CC7F /* AudioToolbox.framework in Frameworks */,
 				0745033B16C9A73600B7CC7F /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,6 +68,7 @@
 		0745033916C9A73600B7CC7F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0745035916C9A78900B7CC7F /* AudioToolbox.framework */,
 				0745033A16C9A73600B7CC7F /* Cocoa.framework */,
 				0745033C16C9A73600B7CC7F /* Other Frameworks */,
 			);
@@ -93,6 +99,7 @@
 		0745034116C9A73600B7CC7F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0745035716C9A77000B7CC7F /* Icons.icns */,
 				0745034216C9A73600B7CC7F /* Silent But Deadly-Info.plist */,
 				0745034316C9A73600B7CC7F /* InfoPlist.strings */,
 				0745034616C9A73600B7CC7F /* main.m */,
@@ -156,6 +163,7 @@
 				0745034516C9A73600B7CC7F /* InfoPlist.strings in Resources */,
 				0745034B16C9A73600B7CC7F /* Credits.rtf in Resources */,
 				0745035116C9A73600B7CC7F /* MainMenu.xib in Resources */,
+				0745035816C9A77000B7CC7F /* Icons.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +275,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Silent But Deadly/Silent But Deadly-Prefix.pch";
 				INFOPLIST_FILE = "Silent But Deadly/Silent But Deadly-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -279,6 +288,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Silent But Deadly/Silent But Deadly-Prefix.pch";
 				INFOPLIST_FILE = "Silent But Deadly/Silent But Deadly-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -7,12 +7,29 @@
 //
 
 #import "AppDelegate.h"
+#import <AudioToolbox/AudioToolbox.h>
+
 
 @implementation AppDelegate
 
+@synthesize window = _window;
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    [self playAlarmSound];
+    _window.isVisible = NO;
+}
+
+-(void) playAlarmSound
+{
+    NSString *path = [NSString stringWithFormat:@"%@%@",
+                      [[NSBundle mainBundle] resourcePath],
+                      @"/silence.aiff"];
+    
+    NSURL *filepath = [NSURL fileURLWithPath:path isDirectory:NO];
+    NSSound *sound = [[NSSound alloc] initWithContentsOfURL:filepath byReference:YES];
+    [sound setLoops:YES];
+    [sound play];
 }
 
 @end
