@@ -18,6 +18,7 @@
 {
     [self playAlarmSound];
     _window.isVisible = NO;
+    //
 }
 
 -(void) playAlarmSound
