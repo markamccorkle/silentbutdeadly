@@ -8,12 +8,14 @@
 
 #import "AppDelegate.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "LoginItem.h"
 
 #define kShouldHideTrayIconUserDefaults @"SilentButDeadly_ShouldHideTrayIcon"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) NSStatusItem *statusItem;
 @property (unsafe_unretained) IBOutlet NSMenu *trayMenu;
+@property (unsafe_unretained) IBOutlet NSMenuItem *launchOnStartupMenuItem;
 @end
 
 @implementation AppDelegate
@@ -28,6 +30,8 @@
         [self showTrayIcon];
     }
     
+    [self.launchOnStartupMenuItem setState:[LoginItem willStartAtLogin] ? NSOnState : NSOffState];
+    
     [self playAlarmSound];
 }
 
@@ -36,6 +40,13 @@
     [self showTrayIcon];
     
     return YES;
+}
+
+- (IBAction)toggleLaunchOnStartup:(NSMenuItem *)sender {
+    BOOL willStartAtLogin = [LoginItem willStartAtLogin];
+    
+    [LoginItem setStartAtLogin:!willStartAtLogin];
+    [self.launchOnStartupMenuItem setState:!willStartAtLogin ? NSOnState : NSOffState];
 }
 
 - (void)showTrayIcon
