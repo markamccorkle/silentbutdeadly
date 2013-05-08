@@ -9,10 +9,11 @@
 #import "AppDelegate.h"
 #import <AudioToolbox/AudioToolbox.h>
 
+#define kShouldHideTrayIconUserDefaults @"SilentButDeadly_ShouldHideTrayIcon"
+
 @interface AppDelegate ()
 @property (nonatomic, strong) NSStatusItem *statusItem;
 @property (unsafe_unretained) IBOutlet NSMenu *trayMenu;
-
 @end
 
 @implementation AppDelegate
@@ -23,6 +24,24 @@
 {
     _window.isVisible = NO;
     
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kShouldHideTrayIconUserDefaults]) {
+        [self showTrayIcon];
+    }
+    
+    [self playAlarmSound];
+}
+
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
+{
+    [self showTrayIcon];
+    
+    return YES;
+}
+
+- (void)showTrayIcon
+{
+    if (self.statusItem) return;
+    
     self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
     self.statusItem.highlightMode = YES;
     self.statusItem.image = [NSImage imageNamed:@"trayIconTemplate.png"];
@@ -31,11 +50,23 @@
     
     [self.statusItem setEnabled:YES];
     
-    [self playAlarmSound];
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kShouldHideTrayIconUserDefaults];
 }
 
-- (IBAction)hideTrayIcon:(NSMenuItem *)sender {
+- (IBAction)hideTrayIcon:(NSMenuItem *)sender
+{
+    NSInteger result = [[NSAlert alertWithMessageText:@"Are you sure you want to hide the icon from the status bar?"
+                                        defaultButton:@"Hide icon"
+                                      alternateButton:@"Cancel"
+                                          otherButton:nil
+                            informativeTextWithFormat:@"You can restore it at any time by launching Silent But Deadly again from the Finder."] runModal];
+    
+    if (!result) return;
+    
     [[NSStatusBar systemStatusBar] removeStatusItem:self.statusItem];
+    self.statusItem = nil;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kShouldHideTrayIconUserDefaults];
 }
 
 -(void) playAlarmSound
