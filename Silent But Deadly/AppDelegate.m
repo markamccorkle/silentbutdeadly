@@ -9,6 +9,11 @@
 #import "AppDelegate.h"
 #import <AudioToolbox/AudioToolbox.h>
 
+@interface AppDelegate ()
+@property (nonatomic, strong) NSStatusItem *statusItem;
+@property (unsafe_unretained) IBOutlet NSMenu *trayMenu;
+
+@end
 
 @implementation AppDelegate
 
@@ -16,9 +21,21 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self playAlarmSound];
     _window.isVisible = NO;
-    //
+    
+    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
+    self.statusItem.highlightMode = YES;
+    self.statusItem.image = [NSImage imageNamed:@"trayIconTemplate.png"];
+    self.statusItem.toolTip = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+    self.statusItem.menu = self.trayMenu;
+    
+    [self.statusItem setEnabled:YES];
+    
+    [self playAlarmSound];
+}
+
+- (IBAction)hideTrayIcon:(NSMenuItem *)sender {
+    [[NSStatusBar systemStatusBar] removeStatusItem:self.statusItem];
 }
 
 -(void) playAlarmSound

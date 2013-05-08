@@ -15,6 +15,8 @@
 		0745035116C9A73600B7CC7F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0745034F16C9A73600B7CC7F /* MainMenu.xib */; };
 		0745035816C9A77000B7CC7F /* Icons.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0745035716C9A77000B7CC7F /* Icons.icns */; };
 		0745035A16C9A78900B7CC7F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0745035916C9A78900B7CC7F /* AudioToolbox.framework */; };
+		FADCE92D173A997100EF5EBA /* trayIconTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = FADCE92C173A997100EF5EBA /* trayIconTemplate.png */; };
+		FAF8D74D173A9CF8001BFC1C /* silence.aiff in Resources */ = {isa = PBXBuildFile; fileRef = FAF8D74C173A9CF8001BFC1C /* silence.aiff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		0745035016C9A73600B7CC7F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		0745035716C9A77000B7CC7F /* Icons.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icons.icns; sourceTree = "<group>"; };
 		0745035916C9A78900B7CC7F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		FADCE92C173A997100EF5EBA /* trayIconTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trayIconTemplate.png; sourceTree = SOURCE_ROOT; };
+		FAF8D74C173A9CF8001BFC1C /* silence.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = silence.aiff; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 			isa = PBXGroup;
 			children = (
 				0745035716C9A77000B7CC7F /* Icons.icns */,
+				FADCE92C173A997100EF5EBA /* trayIconTemplate.png */,
+				FAF8D74C173A9CF8001BFC1C /* silence.aiff */,
 				0745034216C9A73600B7CC7F /* Silent But Deadly-Info.plist */,
 				0745034316C9A73600B7CC7F /* InfoPlist.strings */,
 				0745034616C9A73600B7CC7F /* main.m */,
@@ -164,6 +170,8 @@
 				0745034B16C9A73600B7CC7F /* Credits.rtf in Resources */,
 				0745035116C9A73600B7CC7F /* MainMenu.xib in Resources */,
 				0745035816C9A77000B7CC7F /* Icons.icns in Resources */,
+				FADCE92D173A997100EF5EBA /* trayIconTemplate.png in Resources */,
+				FAF8D74D173A9CF8001BFC1C /* silence.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +321,7 @@
 				0745035616C9A73600B7CC7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
