@@ -8,7 +8,15 @@
 
 #import "AppDelegate.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "LoginItem.h"
 
+#define kShouldHideTrayIconUserDefaults @"SilentButDeadly_ShouldHideTrayIcon"
+
+@interface AppDelegate ()
+@property (nonatomic, strong) NSStatusItem *statusItem;
+@property (unsafe_unretained) IBOutlet NSMenu *trayMenu;
+@property (unsafe_unretained) IBOutlet NSMenuItem *launchOnStartupMenuItem;
+@end
 
 @implementation AppDelegate
 
@@ -16,9 +24,60 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    [self playAlarmSound];
     _window.isVisible = NO;
-    //
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kShouldHideTrayIconUserDefaults]) {
+        [self showTrayIcon];
+    }
+    
+    [self.launchOnStartupMenuItem setState:[LoginItem willStartAtLogin] ? NSOnState : NSOffState];
+    
+    [self playAlarmSound];
+}
+
+- (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag
+{
+    [self showTrayIcon];
+    
+    return YES;
+}
+
+- (IBAction)toggleLaunchOnStartup:(NSMenuItem *)sender {
+    BOOL willStartAtLogin = [LoginItem willStartAtLogin];
+    
+    [LoginItem setStartAtLogin:!willStartAtLogin];
+    [self.launchOnStartupMenuItem setState:!willStartAtLogin ? NSOnState : NSOffState];
+}
+
+- (void)showTrayIcon
+{
+    if (self.statusItem) return;
+    
+    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
+    self.statusItem.highlightMode = YES;
+    self.statusItem.image = [NSImage imageNamed:@"trayIconTemplate.png"];
+    self.statusItem.toolTip = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleName"];
+    self.statusItem.menu = self.trayMenu;
+    
+    [self.statusItem setEnabled:YES];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kShouldHideTrayIconUserDefaults];
+}
+
+- (IBAction)hideTrayIcon:(NSMenuItem *)sender
+{
+    NSInteger result = [[NSAlert alertWithMessageText:@"Are you sure you want to hide the icon from the status bar?"
+                                        defaultButton:@"Hide icon"
+                                      alternateButton:@"Cancel"
+                                          otherButton:nil
+                            informativeTextWithFormat:@"You can restore it at any time by launching Silent But Deadly again from the Finder."] runModal];
+    
+    if (!result) return;
+    
+    [[NSStatusBar systemStatusBar] removeStatusItem:self.statusItem];
+    self.statusItem = nil;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kShouldHideTrayIconUserDefaults];
 }
 
 -(void) playAlarmSound
